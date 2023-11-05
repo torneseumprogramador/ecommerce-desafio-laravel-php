@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "desafio/laravel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Projeto criado com alunos do torne-se um programador desafio de PHP",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
