@@ -23,16 +23,7 @@ class ClientesController extends Controller
     // Armazena um cliente recém-criado no banco de dados
     public function store(Request $request)
     {
-        // TODO para enviar mensagem de erro ao flash message
-        $validatedData = $request->validate([
-            'nome' => 'required|max:150',
-            'telefone' => 'required|max:25',
-            'email' => 'required|email|max:255',
-            'endereco' => 'required',
-        ]);
-
-        // print_r($validatedData);
-        // exit;
+        $validatedData = $this->formValidate($request);
 
         $cliente = Cliente::create($validatedData);
         return redirect('/clientes')->with('success', 'Cliente criado com sucesso.');
@@ -55,13 +46,8 @@ class ClientesController extends Controller
     // Atualiza um cliente no banco de dados
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:150',
-            'phone' => 'required|max:25',
-            'email' => 'required|email|max:255',
-            'address' => 'required',
-        ]);
-
+        $validatedData = $this->formValidate($request);
+    
         Cliente::whereId($id)->update($validatedData);
         return redirect('/clientes')->with('success', 'Cliente atualizado com sucesso.');
     }
@@ -72,5 +58,27 @@ class ClientesController extends Controller
         $cliente = Cliente::findOrFail($id);
         $cliente->delete();
         return redirect('/clientes')->with('success', 'Cliente excluído com sucesso.');
+    }
+
+    private function formValidate($request){
+        $customMessages = [
+            'nomes.required' => 'O campo nome é obrigatório.',
+            'nomes.max' => 'O campo nome não pode ter mais que 150 caracteres.',
+            'telefone.required' => 'O campo telefone é obrigatório.',
+            'telefone.max' => 'O campo telefone não pode ter mais que 25 caracteres.',
+            'email.required' => 'O campo e-mail é obrigatório.',
+            'email.email' => 'O campo e-mail deve ser um endereço de e-mail válido.',
+            'email.max' => 'O campo e-mail não pode ter mais que 255 caracteres.',
+            'endereco.required' => 'O campo endereço é obrigatório.',
+        ];
+    
+        $validatedData = $request->validate([
+            'nome' => 'required|max:150',
+            'telefone' => 'required|max:25',
+            'email' => 'required|email|max:255',
+            'endereco' => 'required',
+        ], $customMessages);
+
+        return $validatedData;
     }
 }
