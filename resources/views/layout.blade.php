@@ -31,6 +31,9 @@
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="/clientes">Clientes</a></li>
                 </ul>
+                <ul class="navbar-nav text-uppercase">
+                    <li class="nav-item"><a class="nav-link" href="/pedidos">Pedidos</a></li>
+                </ul>
             </div>
         </div>
     </nav>
