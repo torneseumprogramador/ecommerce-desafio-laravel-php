@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     public function index(){
         return response()->json([
-            "mensagem" => "Bem vindo a API Zend/Laminas",
+            "mensagem" => "Bem vindo a API Laravel",
             "endpoints" => [
                 "clientes" => [
                     "GET" => "/api/clientes",
