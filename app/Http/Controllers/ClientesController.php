@@ -12,7 +12,7 @@ class ClientesController extends Controller
     public function index()
     {
         $clientes = Cliente::orderBy('id', 'desc')->paginate(5);
-        return response()->json($clientes);
+        return response()->json($clientes->data);
     }
 
     // Armazena um cliente recém-criado no banco de dados
